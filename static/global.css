@@ -1,3 +1,7 @@
+html{
+    box-sizing: border-box;
+}
+
 /* Reset & Deep Space Gradient */
 body {
     margin: 0;
@@ -54,6 +58,62 @@ body {
     opacity: 0.7;
 }
 
+.logo{
+    display: flex;
+    justify-content: center;
+    margin: 6rem auto 0 auto ;
+}
+
+.logo img{
+    width: 20%;
+    height: 20%;
+}
+
+/* Add a black background color to the top navigation */
+.top-nav {
+    display: flex;
+    justify-content: center;
+
+    width: 90%;
+    max-width: 60%;
+
+    margin: 1rem auto 0 auto;
+
+    background-color: #333;
+    padding: 15px 30px;
+    border-radius: 50px; /* Gives it a round pill shape */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds depth */
+}
+
+/* Style the links inside the navigation bar */
+.top-nav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 2% 2% 2% 2%;
+    text-decoration: none;
+}
+
+/* Change the color of links on hover */
+.top-nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.top-nav a.active {
+    background-color: #40025a;
+    color: white;
+}
+
+.nav-links{
+    display: flex;
+    list-style: none;
+    gap: 30px; /* Creates even space between your links */
+    margin: 0;
+    padding: 0;
+}
+
 /* Twinkle Animation Effect */
 @keyframes twinkle {
     0% { opacity: 0.4; }
@@ -73,4 +133,11 @@ body {
 h1 {
     font-size: 3rem;
     text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+@media {max-width: 800px} {
+    .logo img{
+        width: 40%;
+        height: 40%;
+    }
 }
