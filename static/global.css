@@ -1,15 +1,16 @@
-html{
+*{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 /* Reset & Deep Space Gradient */
 body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #020107 0%, #090a1e 70%, #15113c 100%);
+    background-size: cover;
+    background: linear-gradient(to bottom, #020107 0%, #090a1e 70%, #15113c 100%) no-repeat center;
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
 }
 
@@ -58,86 +59,102 @@ body {
     opacity: 0.7;
 }
 
-.logo{
-    display: flex;
-    justify-content: center;
-    margin: 6rem auto 0 auto ;
-}
-
-.logo img{
-    width: 20%;
-    height: 20%;
-}
-
-/* Add a black background color to the top navigation */
-.top-nav {
-    display: flex;
-    justify-content: center;
-
-    width: 90%;
-    max-width: 60%;
-
-    margin: 1rem auto 0 auto;
-
-    background-color: #333;
-    padding: 15px 30px;
-    border-radius: 50px; /* Gives it a round pill shape */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds depth */
-}
-
-/* Style the links inside the navigation bar */
-.top-nav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 2% 2% 2% 2%;
-    text-decoration: none;
-}
-
-/* Change the color of links on hover */
-.top-nav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* Add a color to the active/current link */
-.top-nav a.active {
-    background-color: #40025a;
-    color: white;
-}
-
-.nav-links{
-    display: flex;
-    list-style: none;
-    gap: 30px; /* Creates even space between your links */
-    margin: 0;
-    padding: 0;
-}
-
 /* Twinkle Animation Effect */
 @keyframes twinkle {
     0% { opacity: 0.4; }
     100% { opacity: 1; }
 }
 
-/* Example Content Section */
-.content {
+nav{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    background-color: #202020;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+    border-radius: 15px;
+
+    padding: 0 10px;
+}
+
+nav ul{
+    width: 100%;
+    list-style: none;
     display: flex;
-    flex-direction: column;
+
+    justify-content: space-between;
+    gap: 10px;
+
+    align-items: center;
+}
+
+nav li{
+    height: 50px;
+    display: flex;
+    align-items: center;
+
+    flex-grow: 1;
+}
+
+nav a{
+    width: 100%;
+    height: 90%;
+    text-decoration: none;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    text-align: center;
+    border-radius: 15px;
+    color: white;
 }
 
-h1 {
-    font-size: 3rem;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+.active{
+    background-color: #28013a;
 }
 
-@media {max-width: 800px} {
-    .logo img{
-        width: 40%;
-        height: 40%;
+nav a:hover{
+    background-color: #28013a;
+}
+
+.sidebar{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #202020;
+    box-shadow: -10px 0 10px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+}
+
+.sidebar ul{
+    background: transparent;
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar li{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar a{
+    width: 90%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.menu-button {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .hideOnMobile{
+        display: none;
+    }
+    .menu-button{
+        display: block;
     }
 }

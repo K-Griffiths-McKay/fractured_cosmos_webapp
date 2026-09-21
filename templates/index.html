@@ -14,18 +14,42 @@
         <div class="stars-medium"></div>
     </div>
 
-    <div class="logo">
-        <img class="" src="{{url_for('static',filename='fractured_cosmos_logo.png')}}" alt="Fractured Cosmos">
-    </div>
-
     <!-- Your Actual Web Content Goes Here -->
-    <nav class="top-nav">
-        <ul class="nav-links">
-            <a class="active" href="index">Home</a>
-            <a href="about">About Us</a>
-            <a href="contact">Contact Us</a>
-            <a class='menu-button'>=</a>
+    <nav>
+        <ul class="mainNav">
+            <li class="hideOnMobile"><a class="active" href="index">Home</a></li>
+            <li class="hideOnMobile"><a href="about">About Us</a></li>
+            <li class="hideOnMobile"><a href="">Contact Us</a></li>
+            <li class="hideOnMobile"><a href="">Updates</a></li>
+            <li class="hideOnMobile"><a href="">Forum</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+        </ul>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+            <li><a class="active" href="">Home</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Contact Us</a></li>
+            <li><a href="">Updates</a></li>
+            <li><a href="">Forum</a></li>
         </ul>
     </nav>
+
+    <script>
+        function showSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = 'flex';
+
+            const mainNav = document.querySelector('.mainNav');
+            mainNav.style.display = 'none';
+        }
+
+        function hideSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = 'none';
+
+            const mainNav = document.querySelector('.mainNav');
+            mainNav.style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
