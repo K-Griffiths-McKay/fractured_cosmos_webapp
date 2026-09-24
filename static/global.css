@@ -150,6 +150,19 @@ nav a:hover{
     display: none;
 }
 
+.logo-link{
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo{
+    width: clamp(120px, 20vw, 300px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 @media (max-width: 800px) {
     .hideOnMobile{
         display: none;
