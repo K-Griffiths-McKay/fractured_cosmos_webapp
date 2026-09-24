@@ -150,6 +150,10 @@ nav a:hover{
     display: none;
 }
 
+.logo-container {
+text-align: center;
+}
+
 .logo-link{
     display: inline-block;
 }
