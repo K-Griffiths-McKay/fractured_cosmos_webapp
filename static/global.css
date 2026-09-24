@@ -157,8 +157,10 @@ nav a:hover{
 }
 
 .logo{
-    max-height: 120px;
-    width: auto;
+    width: clamp(120px, 20vw, 300px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 @media (max-width: 800px) {
