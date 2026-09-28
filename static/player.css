@@ -1,0 +1,124 @@
+.player-container{
+    margin-top: 3%;
+    display: flex;
+    width:80%;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.player-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-input{
+    width: 60%;
+    height: 50px;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #4c4c4c;
+    border: white solid 1px;
+    color: white;
+}
+
+.player-input::placeholder{
+    color: #c3c3c3;
+}
+
+.player-submit{
+    margin-top: 0.5%;
+    width: 20%;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #28013a;
+    color:white;
+}
+
+.player-submit:hover{
+    background-color: #51007c;
+    cursor: pointer;
+}
+
+.player-info{
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.player-profile{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    border: white solid 1px;
+    border-radius: 15px;
+}
+
+.player-image{
+    margin-top: 2%;
+    float: left;
+    width: 50%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.player-statistics{
+    width: 50%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    border: white solid 1px;
+    border-radius: 15px;
+}
+
+.player-economy{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: #51007c dotted 2px;
+    margin-top: 2%;
+}
+
+.player-is-skills{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: #51007c dotted 2px;
+    margin-top: 10%;
+    align-items: center;
+}
+
+.xp-bar {
+    width: 50%;
+    height: 12px;
+    background: #202020;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.xp-progress {
+    height: 100%;
+    background: #4caf50;
+    border-radius: 6px;
+}
+
+.skill{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

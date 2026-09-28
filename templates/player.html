@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fractured Cosmos</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='player.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='fractured_cosmos_icon.ico') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
     <!-- The Background Layout -->
     <div class="space">
         <div class="stars"></div>
         <div class="stars-medium"></div>
+    </div>
+
+    <div class="logo-container">
+        <a href="/" class="logo-link"><img class="logo" src="{{url_for('static', filename='fractured_cosmos_logo.png')}}"></a>
     </div>
 
     <!-- Your Actual Web Content Goes Here -->
@@ -33,6 +39,93 @@
             <li><a href="">Forum</a></li>
         </ul>
     </nav>
+
+    <div class="player-container">
+        <form action="/player"  method="GET" class="player-form">
+            <input
+                    type="text"
+                    class="player-input"
+                    name="name"
+                    placeholder="Insert Player Name"
+                    value="{{ search_name or '' }}"
+            >
+
+            <button class="player-submit" type="submit">
+                Search
+            </button>
+        </form>
+
+        <div class="player-info">
+            {% if error %}
+
+                <div class="player-profile">
+                    <h1>Username</h1>
+                    <img class="player-image" src="{{url_for('static',filename='Alex_Minecraft.png')}}">
+                </div>
+
+                <div class="player-statistics">
+                    <p>{{ error }}</p>
+                </div>
+
+            {% elif player %}
+
+                <div class="player-profile">
+                    <h1>{{ player.player_name }}</h1>
+                    <img class="player-image" src="https://api.mineatar.io/body/full/{{player.player_uuid}}">
+                </div>
+
+                <div class="player-statistics">
+                    <h1>Player Statistics</h1>
+                    <div class="player-economy">
+                        <h2>Player Bank</h2>
+                        <p>Coins: {{ player.coins }}</p>
+                        <p>Fragments: {{ player.fragments }}</p>
+                        <p>Tool Points: {{ player.tool_points }}</p>
+                    </div>
+
+                    <div class="player-is-skills">
+                        <h2>Island Professions</h2>
+                        <p class="skill">Mining Level: {{skills.skill_1.level}}</p>
+                        <div class="xp-bar">
+                            <div
+                                class="xp-progress"
+                                style="width:{{ skills.skill_1.percent }}%;"
+                            ></div>
+                        </div>
+                        <p class="skill">Slaying Level: {{skills.skill_2.level}}</p>
+                        <div class="xp-bar">
+                            <div
+                                class="xp-progress"
+                                style="width:{{ skills.skill_2.percent }}%;"
+                            ></div>
+                        </div>
+                        <p class="skill">Fishing Level: {{skills.skill_3.level}}</p>
+                        <div class="xp-bar">
+                            <div
+                                class="xp-progress"
+                                style="width:{{ skills.skill_3.percent }}%;"
+                            ></div>
+                        </div>
+                        <p class="skill">Farming Level: {{skills.skill_4.level}}</p>
+                        <div class="xp-bar">
+                            <div
+                                class="xp-progress"
+                                style="width:{{ skills.skill_4.percent }}%;"
+                            ></div>
+                        </div>
+                        <p class="skill">Woodcutting Level: {{skills.skill_5.level}}</p>
+                        <div class="xp-bar">
+                            <div
+                                class="xp-progress"
+                                style="width:{{ skills.skill_5.percent }}%;"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
 
     <script>
         function showSidebar() {
