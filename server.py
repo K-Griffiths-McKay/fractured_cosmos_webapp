@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, abort
 import json
 import requests
 from jinja2 import TemplateNotFound
+import math
 
 app = Flask(__name__)
 
@@ -64,7 +65,7 @@ def roundToTen(value):
 
 def calculateMaxXP(level):
     base = (level*100) + ((level/10)*1000) + ((level/25)*5000) + ((level/50)*10000)
-    total = base**2
+    total = base * math.sqrt(2)
     return roundToTen(total)
 
 
