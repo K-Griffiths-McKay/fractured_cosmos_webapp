@@ -1,27 +1,9 @@
-from flask import Flask, render_template, request, jsonify
-import mysql.connector
+from flask import Flask, render_template, request, abort
 import json
+import requests
+from jinja2 import TemplateNotFound
 
 app = Flask(__name__)
-
-host = '143.47.238.193'
-port = 3306
-database = 'fractureddata'
-username = 'appuser'
-password = 'Misfits2024!'
-driver = '{SQL Server}'
-
-def connect():
-    config = {
-        'host': host,
-        'port': port,
-        'database': database,
-        'user': username,
-        'password': password,
-        'raise_on_warnings': True
-    }
-
-    return mysql.connector.connect(**config)
 
 @app.route("/")
 def root():
@@ -29,55 +11,15 @@ def root():
 
 @app.route("/<string:page>")
 def html_page(page="index"):
-    return render_template(page + ".html")
+    try:
+        return render_template(page + ".html")
+    except TemplateNotFound:
+        abort(404)
 
 @app.route("/player")
 def player_page():
 
     player_name = request.args.get("name")
-
-    conn = connect()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("""
-        SELECT
-            a.*,
-            c.coins,
-            c.fragments,
-            c.tool_points,
-
-            JSON_ARRAYAGG(
-                JSON_OBJECT(
-                    'skill_name',b.skill_name,
-                    'skill_id', b.skill_id,
-                    'level', b.level,
-                    'xp', b.xp,
-                    'all_xp', b.all_xp
-                )
-            ) AS skills
-
-        FROM player_master AS a
-
-        LEFT JOIN player_economy AS c
-            ON a.player_uuid = c.player_uuid
-
-        LEFT JOIN player_skills AS b
-            ON a.player_uuid = b.player_uuid
-
-        WHERE a.player_name COLLATE utf8mb4_bin = %s
-
-        GROUP BY
-            a.player_uuid,
-            a.player_name,
-            c.coins,
-            c.fragments,
-            c.tool_points
-    """, (player_name,))
-
-    player = cursor.fetchone()
-
-    cursor.close()
-    conn.close()
 
     if not player_name:
         return render_template(
@@ -86,10 +28,26 @@ def player_page():
                     search_name=player_name
                 )
 
-    if not player:
+    try:
+        response = requests.get(
+            f"https://api.fracturedcosmos.xyz/players/{player_name}"
+        )
+
+        if response.status_code == 404:
+            return render_template(
+                "player.html",
+                error="Player not found",
+                search_name=player_name
+            )
+
+        response.raise_for_status()
+
+        player = response.json()
+
+    except requests.RequestException:
         return render_template(
             "player.html",
-            error="Player not found",
+            error="Unable to connect to the player service",
             search_name=player_name
         )
 
@@ -98,54 +56,6 @@ def player_page():
         player=player,
         skills=getSkills(player.get("skills"))
     )
-
-@app.route("/api/<string:player_name>")
-def json_api(player_name):
-
-    conn = connect()
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute("""
-        SELECT
-            a.*,
-            c.coins,
-            c.fragments,
-            c.tool_points,
-
-            JSON_ARRAYAGG(
-                JSON_OBJECT(
-                    'skill_name',b.skill_name,
-                    'skill_id', b.skill_id,
-                    'level', b.level,
-                    'xp', b.xp,
-                    'all_xp', b.all_xp
-                )
-            ) AS skills
-
-        FROM player_master AS a
-
-        LEFT JOIN player_economy AS c
-            ON a.player_uuid = c.player_uuid
-
-        LEFT JOIN player_skills AS b
-            ON a.player_uuid = b.player_uuid
-
-        WHERE a.player_name COLLATE utf8mb4_bin = %s
-
-        GROUP BY
-            a.player_uuid,
-            a.player_name,
-            c.coins,
-            c.fragments,
-            c.tool_points
-    """, (player_name,))
-
-    player = cursor.fetchone()
-
-    cursor.close()
-    conn.close()
-
-    return jsonify(player)
 
 
 def roundToTen(value):
